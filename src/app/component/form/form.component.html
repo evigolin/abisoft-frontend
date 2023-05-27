@@ -1,0 +1,64 @@
+<div class="row text-center py-3 border bg-primary text-white">
+    <div class="col-12">
+        <h3>{{ title }}</h3>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col col-auto col-md-8 card">
+            <form [formGroup]="form" (ngSubmit)="validateData()" class="mb-5">
+                <div class="mb-3 mt-3">
+                    <label for="nameComplete" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="nameComplete" formControlName="nameComplete" />
+                    <span *ngIf="this.form.get('nameComplete')?.errors?.['required'] && submit" class="text-danger">
+                        (El nombre no puede quedar vacío)
+                    </span>
+                    <span *ngIf="this.form.get('nameComplete')?.errors?.['pattern']" class="text-danger">
+                        (El nombre solo debe contener letras)
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label">Edad</label>
+                    <input type="text" class="form-control" id="age" formControlName="age" />
+                    <span *ngIf="this.form.get('age')?.errors?.['required'] && submit" class="text-danger">
+                        (La edad no puede quedar vacío)
+                    </span>
+                    <span *ngIf="this.form.get('age')?.errors?.['pattern']" class="text-danger">
+                        (La edad solo puede contener numeros)
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <label for="birthdate" class="form-label">Fecha de nacimiento</label>
+                    <input type="date" class="form-control" id="birthdate" formControlName="birthdate" />
+                    <span *ngIf="this.form.get('birthdate')?.errors?.['required'] && submit" class="text-danger">
+                        (la fecha de nacimiento no puede quedar vacío)
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <label for="registrationDate" class="form-label">Fecha de inscripción</label>
+                    <input #input type="date" class="form-control" id="registrationDate"
+                        formControlName="registrationDate" (change)="validateCost($event)" />
+                    <span *ngIf="this.form.get('registrationDate')?.errors?.['required'] && submit" class="text-danger">
+                        (La Fecha de inscripció no puede quedar vacío)
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <label for="cost" class="form-label">Costo($)</label>
+                    <input type="text" class="form-control" id="cost" [value]="cost" [disabled]="true" />
+                </div>
+
+                <div class="d-flex justify-content-center" *ngIf="loading">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary float-start" [disabled]="loading">{{ id ? 'Actualizar' : 'Guardar' }}</button>
+                    <button type="button" class="btn btn-danger float-end" [disabled]="loading" (click)="backClicked()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

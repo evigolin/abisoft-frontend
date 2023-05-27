@@ -1,0 +1,43 @@
+<div class="row text-center py-3 border bg-primary text-white">
+    <div class="col-12">
+        <h3>Evimar Golindano</h3>
+    </div>
+</div>
+
+<div class="mx-5 mt-3">
+    <div class="row">
+        <div class="col-12 text-end mb-3">
+            <button class="btn btn-primary" [routerLink]="['/form']" [disabled]="loading">Agregar</button>
+        </div>
+        <div class="col col-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Nombre Completo</th>
+                        <th scope="col" class="text-center">Edad</th>
+                        <th scope="col" class="text-center">Fecha de nacimiento</th>
+                        <th scope="col" class="text-center">Fecha de inscripción</th>
+                        <th scope="col" class="text-center">Costo</th>
+                        <th scope="col" class="text-center"></th>
+                        <th scope="col" class="text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items">
+                        <td class="text-center">{{ item.nameComplete }}</td>
+                        <td class="text-center">{{ item.age }}</td>
+                        <td class="text-center">{{ item.birthdate }}</td>
+                        <td class="text-center">{{ item.registrationDate }}</td>
+                        <td class="text-center">{{ item.cost }}</td>
+                        <td class="text-right">
+                            <button class="btn btn-primary" [routerLink]="['/form/', item.id]" [disabled]="loading">Editar</button>
+                        </td>
+                        <td class="text-left">
+                            <button class="btn btn-danger" (click)="deleteItem(item.id)" [disabled]="loading">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
